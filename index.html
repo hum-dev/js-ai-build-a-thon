@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Contoso Outdoor Company</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        font-family: "Quicksand", "Montserrat", sans-serif;
+        background: linear-gradient(135deg, #8fbcff 0%, #7f66ee 100%);
+        min-height: 100vh;
+      }
+      .glass {
+        background: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 12px 32px rgba(56, 63, 112, 0.12),
+          0 1.5px 4px rgba(56, 63, 112, 0.08);
+        -webkit-backdrop-filter: blur(14px);
+        backdrop-filter: blur(14px);
+      }
+      .product-icon {
+        width: 200px;
+        height: 200px;
+        margin-bottom: 1rem;
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+      .product-icon:hover {
+        transform: scale(1.05);
+      }
+      h1 {
+        font-family: "Montserrat", sans-serif;
+      }
+    </style>
+  </head>
+  <body class="flex flex-col min-h-screen pb-12">
+    <!-- Header -->
+    <header
+      class="w-full py-12 bg-gradient-to-tr from-indigo-600/80 via-blue-500/40 to-purple-500/80 glass shadow-xl"
+    >
+      <div class="max-w-3xl mx-auto px-4 text-center">
+        <h1
+          class="text-4xl md:text-5xl font-bold tracking-wider text-white drop-shadow-lg mb-3"
+        >
+          Contoso Outdoor Company
+        </h1>
+        <p class="text-lg md:text-xl text-indigo-50 font-medium drop-shadow">
+          Adventure Begins Here
+        </p>
+      </div>
+    </header>
+
+    <main class="w-full max-w-5xl mx-auto px-4 mt-8 space-y-12">
+      <!-- Tents Section -->
+      <section class="glass rounded-3xl p-7 md:p-10 shadow-lg">
+        <h2 class="text-2xl md:text-3xl font-bold text-indigo-700 mb-2">
+          Tents
+        </h2>
+        <p class="text-indigo-900/70 mb-7">
+          Unfold adventure with Contoso's range of premium camping tents.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          <!-- Tent 1 -->
+          <div
+            class="rounded-2xl p-6 bg-white/60 hover:scale-105 transition-transform group shadow-md relative overflow-hidden"
+          >
+            <div class="flex flex-col items-center">
+              <div class="product-icon">
+                <svg
+                  viewBox="0 0 200 200"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M100 20L180 160H20L100 20Z"
+                    stroke="#6530be"
+                    stroke-width="6"
+                    fill="#b1acd6"
+                  />
+                  <path d="M100 40V160" stroke="#5755d9" stroke-width="4" />
+                  <path d="M60 160H140" stroke="#6530be" stroke-width="6" />
+                  <path
+                    d="M40 120L100 40L160 120"
+                    stroke="#5755d9"
+                    stroke-width="4"
+                    fill="none"
+                  />
+                  <circle cx="100" cy="100" r="8" fill="#6530be" />
+                </svg>
+              </div>
+              <div class="text-center space-y-3">
+                <h3 class="font-bold text-lg text-indigo-700">
+                  TrailMaster X4 Tent
+                </h3>
+                <p class="text-sm text-indigo-900/70">
+                  4-person tent with WeatherShield™ technology, dual vestibules,
+                  and enhanced ventilation.
+                </p>
+                <ul class="text-sm text-indigo-900/70 space-y-1">
+                  <li>• Waterproof rating: 3000mm</li>
+                  <li>• Weight: 4.2 kg</li>
+                  <li>• Setup time: 10 minutes</li>
+                </ul>
+                <p class="text-lg text-indigo-900/80 font-bold">$250</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tent 2 -->
+          <div
+            class="rounded-2xl p-6 bg-white/60 hover:scale-105 transition-transform group shadow-md relative overflow-hidden"
+          >
+            <div class="flex flex-col items-center">
+              <div class="product-icon">
+                <svg
+                  viewBox="0 0 200 200"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M100 30L170 160H30L100 30Z"
+                    stroke="#2b8abf"
+                    stroke-width="6"
+                    fill="#b3e7f4"
+                  />
+                  <path
+                    d="M65 160L100 30L135 160"
+                    stroke="#19497a"
+                    stroke-width="4"
+                  />
+                  <path d="M30 160H170" stroke="#2b8abf" stroke-width="6" />
+                  <rect
+                    x="85"
+                    y="80"
+                    width="30"
+                    height="40"
+                    rx="2"
+                    fill="#19497a"
+                  />
+                  <circle cx="100" cy="60" r="6" fill="#2b8abf" />
+                </svg>
+              </div>
+              <div class="text-center space-y-3">
+                <h3 class="font-bold text-lg text-indigo-700">
+                  Alpine Explorer Tent
+                </h3>
+                <p class="text-sm text-indigo-900/70">
+                  Ultralight 3-season tent designed for high-altitude camping.
+                </p>
+                <ul class="text-sm text-indigo-900/70 space-y-1">
+                  <li>• 3-4 Season rating</li>
+                  <li>• Weight: 2.8 kg</li>
+                  <li>• Wind resistance: 60 mph</li>
+                </ul>
+                <p class="text-lg text-indigo-900/80 font-bold">$300</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tent 3 -->
+          <div
+            class="rounded-2xl p-6 bg-white/60 hover:scale-105 transition-transform group shadow-md relative overflow-hidden"
+          >
+            <div class="flex flex-col items-center">
+              <div class="product-icon">
+                <svg
+                  viewBox="0 0 200 200"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M40 100L100 40L160 100"
+                    stroke="#f1914f"
+                    stroke-width="6"
+                    fill="#ffeecc"
+                  />
+                  <rect
+                    x="50"
+                    y="100"
+                    width="100"
+                    height="60"
+                    rx="8"
+                    fill="#ffeecc"
+                    stroke="#f1914f"
+                    stroke-width="4"
+                  />
+                  <path d="M85 100V160" stroke="#f1914f" stroke-width="3" />
+                  <path d="M115 100V160" stroke="#f1914f" stroke-width="3" />
+                  <circle cx="100" cy="130" r="10" fill="#f1914f" />
+                </svg>
+              </div>
+              <div class="text-center space-y-3">
+                <h3 class="font-bold text-lg text-indigo-700">
+                  SkyView 2-Person Tent
+                </h3>
+                <p class="text-sm text-indigo-900/70">
+                  Innovative stargazing tent with removable rainfly and mesh
+                  ceiling.
+                </p>
+                <ul class="text-sm text-indigo-900/70 space-y-1">
+                  <li>• Mesh ceiling panel</li>
+                  <li>• Weight: 2.1 kg</li>
+                  <li>• Quick-pitch design</li>
+                </ul>
+                <p class="text-lg text-indigo-900/80 font-bold">$380</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Backpacks Section -->
+      <section class="glass rounded-3xl p-7 md:p-10 shadow-lg">
+        <h2 class="text-2xl md:text-3xl font-bold text-indigo-700 mb-2">
+          Backpacks
+        </h2>
+        <p class="text-indigo-900/70 mb-7">
+          Premium backpacks designed for every adventure.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+          <!-- Backpack 1 -->
+          <div
+            class="rounded-2xl p-6 bg-white/60 hover:scale-105 transition-transform group shadow-md relative overflow-hidden"
+          >
+            <div class="flex flex-col items-center">
+              <div class="product-icon">
+                <svg
+                  viewBox="0 0 200 200"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    x="50"
+                    y="60"
+                    width="100"
+                    height="120"
+                    rx="12"
+                    fill="#e0f2f1"
+                    stroke="#158766"
+                    stroke-width="6"
+                  />
+                  <path
+                    d="M50 80C50 60 70 40 100 40C130 40 150 60 150 80"
+                    stroke="#158766"
+                    stroke-width="6"
+                  />
+                  <rect
+                    x="70"
+                    y="100"
+                    width="60"
+                    height="20"
+                    rx="6"
+                    fill="#94f3c4"
+                  />
+                  <rect
+                    x="70"
+                    y="140"
+                    width="60"
+                    height="20"
+                    rx="6"
+                    fill="#94f3c4"
+                  />
+                  <circle cx="100" cy="70" r="8" fill="#158766" />
+                </svg>
+              </div>
+              <div class="text-center space-y-3">
+                <h3 class="font-bold text-lg text-indigo-700">
+                  Adventurer Pro Backpack
+                </h3>
+                <p class="text-sm text-indigo-900/70">
+                  Professional-grade backpack with advanced suspension system.
+                </p>
+                <ul class="text-sm text-indigo-900/70 space-y-1">
+                  <li>• Capacity: 65L</li>
+                  <li>• Hydration compatible</li>
+                  <li>• Rain cover included</li>
+                </ul>
+                <p class="text-lg text-indigo-900/80 font-bold">$60</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Backpack 2 -->
+          <div
+            class="rounded-2xl p-6 bg-white/60 hover:scale-105 transition-transform group shadow-md relative overflow-hidden"
+          >
+            <div class="flex flex-col items-center">
+              <div class="product-icon">
+                <svg
+                  viewBox="0 0 200 200"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    x="60"
+                    y="50"
+                    width="80"
+                    height="110"
+                    rx="10"
+                    fill="#ceeafd"
+                    stroke="#5680c8"
+                    stroke-width="6"
+                  />
+                  <path
+                    d="M60 70C60 50 75 35 100 35C125 35 140 50 140 70"
+                    stroke="#5680c8"
+                    stroke-width="6"
+                  />
+                  <rect
+                    x="75"
+                    y="90"
+                    width="50"
+                    height="15"
+                    rx="4"
+                    fill="#a9d1f6"
+                  />
+                  <circle cx="100" cy="60" r="8" fill="#5680c8" />
+                  <path d="M75 130L125 130" stroke="#5680c8" stroke-width="4" />
+                </svg>
+              </div>
+              <div class="text-center space-y-3">
+                <h3 class="font-bold text-lg text-indigo-700">
+                  Summit Climber Backpack
+                </h3>
+                <p class="text-sm text-indigo-900/70">
+                  Technical climbing backpack with ice axe loops.
+                </p>
+                <ul class="text-sm text-indigo-900/70 space-y-1">
+                  <li>• Capacity: 45L</li>
+                  <li>• Crampon pocket</li>
+                  <li>• Reinforced haul loops</li>
+                </ul>
+                <p class="text-lg text-indigo-900/80 font-bold">$70</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Backpack 3 -->
+          <div
+            class="rounded-2xl p-6 bg-white/60 hover:scale-105 transition-transform group shadow-md relative overflow-hidden"
+          >
+            <div class="flex flex-col items-center">
+              <div class="product-icon">
+                <svg
+                  viewBox="0 0 200 200"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    x="70"
+                    y="60"
+                    width="60"
+                    height="90"
+                    rx="8"
+                    fill="#ffe3e3"
+                    stroke="#d9777c"
+                    stroke-width="6"
+                  />
+                  <path
+                    d="M70 80C70 65 80 50 100 50C120 50 130 65 130 80"
+                    stroke="#d9777c"
+                    stroke-width="6"
+                  />
+                  <rect
+                    x="80"
+                    y="100"
+                    width="40"
+                    height="10"
+                    rx="3"
+                    fill="#fff2b1"
+                  />
+                  <circle cx="100" cy="75" r="6" fill="#d9777c" />
+                  <path d="M80 130H120" stroke="#d9777c" stroke-width="4" />
+                </svg>
+              </div>
+              <div class="text-center space-y-3">
+                <h3 class="font-bold text-lg text-indigo-700">
+                  TrailLite Daypack
+                </h3>
+                <p class="text-sm text-indigo-900/70">
+                  Lightweight and versatile daypack for short hikes.
+                </p>
+                <ul class="text-sm text-indigo-900/70 space-y-1">
+                  <li>• Capacity: 25L</li>
+                  <li>• Laptop sleeve</li>
+                  <li>• Weighs only 400g</li>
+                </ul>
+                <p class="text-lg text-indigo-900/80 font-bold">$40</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hiking Clothing Section -->
+      <section class="glass rounded-3xl p-7 md:p-10 shadow-lg">
+        <h2 class="text-2xl md:text-3xl font-bold text-indigo-700 mb-2">
+          Hiking Clothing
+        </h2>
+        <p class="text-indigo-900/70 mb-7">
+          Premium outdoor apparel for all conditions.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+          <!-- Clothing 1 -->
+          <div
+            class="rounded-2xl p-6 bg-white/60 hover:scale-105 transition-transform group shadow-md relative overflow-hidden"
+          >
+            <div class="flex flex-col items-center">
+              <div class="product-icon">
+                <svg
+                  viewBox="0 0 200 200"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M40 60L100 30L160 60V150C160 161 151 170 140 170H60C49 170 40 161 40 150V60Z"
+                    fill="#dae2fb"
+                    stroke="#5745b7"
+                    stroke-width="6"
+                  />
+                  <path d="M100 30V170" stroke="#93a3e4" stroke-width="4" />
+                  <path d="M70 100H130" stroke="#93a3e4" stroke-width="4" />
+                  <path
+                    d="M40 60L20 90M160 60L180 90"
+                    stroke="#5745b7"
+                    stroke-width="4"
+                  />
+                </svg>
+              </div>
+              <div class="text-center space-y-3">
+                <h3 class="font-bold text-lg text-indigo-700">
+                  Summit Breeze Jacket
+                </h3>
+                <p class="text-sm text-indigo-900/70">
+                  Lightweight waterproof jacket with breathability.
+                </p>
+                <ul class="text-sm text-indigo-900/70 space-y-1">
+                  <li>• 3-layer construction</li>
+                  <li>• Pit zips for ventilation</li>
+                  <li>• Adjustable hood</li>
+                </ul>
+                <p class="text-lg text-indigo-900/80 font-bold">$60</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Clothing 2 -->
+          <div
+            class="rounded-2xl p-6 bg-white/60 hover:scale-105 transition-transform group shadow-md relative overflow-hidden"
+          >
+            <div class="flex flex-col items-center">
+              <div class="product-icon">
+                <svg
+                  viewBox="0 0 200 200"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M60 40H140L130 170H70L60 40Z"
+                    fill="#ffe6ae"
+                    stroke="#d4a455"
+                    stroke-width="6"
+                  />
+                  <path
+                    d="M70 170L60 190M130 170L140 190"
+                    stroke="#d4a455"
+                    stroke-width="4"
+                  />
+                  <path d="M80 80H120" stroke="#d4a455" stroke-width="4" />
+                  <path
+                    d="M75 120H125"
+                    stroke="#d4a455"
+                    stroke-width="4"
+                    stroke-dasharray="4 4"
+                  />
+                  <circle cx="100" cy="120" r="6" fill="#d4a455" />
+                </svg>
+              </div>
+              <div class="text-center space-y-3">
+                <h3 class="font-bold text-lg text-indigo-700">
+                  TrailBlaze Pants
+                </h3>
+                <p class="text-sm text-indigo-900/70">
+                  Durable hiking pants with zip-off legs.
+                </p>
+                <ul class="text-sm text-indigo-900/70 space-y-1">
+                  <li>• UPF 50+ protection</li>
+                  <li>• Articulated knees</li>
+                  <li>• 6 pockets</li>
+                </ul>
+                <p class="text-lg text-indigo-900/80 font-bold">$80</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Clothing 3 -->
+          <div
+            class="rounded-2xl p-6 bg-white/60 hover:scale-105 transition-transform group shadow-md relative overflow-hidden"
+          >
+            <div class="flex flex-col items-center">
+              <div class="product-icon">
+                <svg
+                  viewBox="0 0 200 200"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M40 120C40 100 60 90 80 90H120C140 90 160 100 160 120V140C160 151 151 160 140 160H60C49 160 40 151 40 140V120Z"
+                    fill="#f7eac3"
+                    stroke="#c4a87a"
+                    stroke-width="6"
+                  />
+                  <path
+                    d="M80 90V60C80 49 89 40 100 40H100C111 40 120 49 120 60V90"
+                    stroke="#c4a87a"
+                    stroke-width="6"
+                  />
+                  <path d="M60 120H140" stroke="#c4a87a" stroke-width="4" />
+                  <path d="M70 140H130" stroke="#c4a87a" stroke-width="4" />
+                  <circle cx="100" cy="105" r="5" fill="#c4a87a" />
+                </svg>
+              </div>
+              <div class="text-center space-y-3">
+                <h3 class="font-bold text-lg text-indigo-700">
+                  TREKSTAR Boots
+                </h3>
+                <p class="text-sm text-indigo-900/70">
+                  Professional hiking boots with Vibram® soles.
+                </p>
+                <ul class="text-sm text-indigo-900/70 space-y-1">
+                  <li>• Gore-Tex® lined</li>
+                  <li>• Memory foam insole</li>
+                  <li>• Ankle support</li>
+                </ul>
+                <p class="text-lg text-indigo-900/80 font-bold">$120</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full mt-16 text-center text-indigo-50 text-sm py-8 glass">
+      <span>© 2024 Contoso Outdoor Company. Adventure awaits.</span>
+    </footer>
+  </body>
+</html>
