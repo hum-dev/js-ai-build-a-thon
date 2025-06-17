@@ -404,3 +404,4 @@ FodyWeavers.xsd
 .env
 .env.local
 .env.*.local
+.azure
