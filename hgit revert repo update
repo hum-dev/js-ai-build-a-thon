@@ -1,0 +1,21 @@
+[33m52bfec9[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Added os mcp server
+[33m2b9fe92[m Added os mcp server
+[33m669d001[m Added os mcp server
+[33m4538b79[m repo update
+[33m9567bf5[m Update to 7 in STEP and README.md
+[33mb471124[m Merge branch 'main' of https://github.com/hum-dev/js-ai-build-a-thon
+[33m4d39310[m Added agent mode
+[33m49de2e0[m Update to 6 in STEP and README.md
+[33m9fbf449[m Updated to use LangChain.js and added conversation memory
+[33mfe0eb7e[m Update to 5 in STEP and README.md
+[33m01b55a9[m Connected to external data using RAG technique
+[33m81ee739[m Update to 4 in STEP and README.md
+[33m9e77356[m Added a simple chat interface
+[33mf4f0e3a[m Update to 3 in STEP and README.md
+[33m2c21da3[m Merge branch 'main' of https://github.com/hum-dev/js-ai-build-a-thon
+[33me2abfdc[m Connect to Azure AI Foundry
+[33m59fc965[m Update to 2 in STEP and README.md
+[33m552055b[m Working with GitHub Models and AI Toolkit
+[33m521f453[m Update to 1 in STEP and README.md
+[33m183a6dc[m Initialize README with personalized step 0 instructions
+[33mc8c5784[m Initial commit
