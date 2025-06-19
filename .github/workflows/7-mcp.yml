@@ -51,7 +51,7 @@ jobs:
           fi
 
       - name: Update to step 8
-        if: steps.check_node-os-mcp.outputs.node-os-mcp_exists == 'true'
+        if: steps.check_node-os-mcp.outputs.agent_exists == 'true'
         uses: skills/action-update-step@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
