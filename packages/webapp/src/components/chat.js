@@ -10,17 +10,19 @@ import "./chat.css"; // Import the CSS file
 export class ChatInterface extends LitElement {
   static get properties() {
     return {
+      chatMode: { type: String }, // Add new property for mode
       messages: { type: Array },
       inputMessage: { type: String },
       isLoading: { type: Boolean },
       isRetrieving: { type: Boolean },
-      ragEnabled: { type: Boolean }
+      ragEnabled: { type: Boolean },
     };
   }
 
   constructor() {
     super();
     // Initialize component state
+    this.chatMode = "basic"; // Set default mode to basic
     this.messages = [];
     this.inputMessage = "";
     this.isLoading = false;
@@ -96,46 +98,82 @@ export class ChatInterface extends LitElement {
           <button class="clear-cache-btn" @click=${this._clearCache}>
             🧹Clear Chat
           </button>
-          <label class="rag-toggle">
-            <input type="checkbox" ?checked=${this.ragEnabled} @change=${this._toggleRag}>
+          <div class="mode-selector">
+            <label>Mode:</label>
+            <select @change=${this._handleModeChange}>
+              <option value="basic" ?selected=${this.chatMode === "basic"}>
+                Basic AI
+              </option>
+              <option value="agent" ?selected=${this.chatMode === "agent"}>
+                Agent
+              </option>
+            </select>
+          </div>
+          <label
+            class="rag-toggle ${this.chatMode === "agent" ? "disabled" : ""}"
+          >
+            <input
+              type="checkbox"
+              ?checked=${this.ragEnabled}
+              @change=${this._toggleRag}
+              ?disabled=${this.chatMode === "agent"}
+            />
             Use Employee Handbook
           </label>
         </div>
         <div class="chat-messages">
-          ${this.messages.map(message => html`
-            <div class="message ${message.role === 'user' ? 'user-message' : 'ai-message'}">
-              <div class="message-content">
-                <span class="message-sender">${message.role === 'user' ? 'You' : 'AI'}</span>
-                ${unsafeHTML(this.formatMessage(message.content))}
-                ${this.ragEnabled && message.sources && message.sources.length > 0 ? html`
-                  <details class="sources">
-                    <summary>📚 Sources</summary>
-                    <div class="sources-content">
-                      ${message.sources.map(source => html`<p>${source}</p>`)}
-                    </div>
-                  </details>
-                ` : ''}
+          ${this.messages.map(
+            (message) => html`
+              <div
+                class="message ${message.role === "user"
+                  ? "user-message"
+                  : "ai-message"}"
+              >
+                <div class="message-content">
+                 <span class="message-sender">${message.role === 'user' ? 'You' : (this.chatMode === 'agent' ? 'Agent' : 'AI')}</span>
+                  ${unsafeHTML(this.formatMessage(message.content))}
+                  ${this.ragEnabled &&
+                  message.sources &&
+                  message.sources.length > 0
+                    ? html`
+                        <details class="sources">
+                          <summary>📚 Sources</summary>
+                          <div class="sources-content">
+                            ${message.sources.map(
+                              (source) => html`<p>${source}</p>`
+                            )}
+                          </div>
+                        </details>
+                      `
+                    : ""}
+                </div>
               </div>
-            </div>
-          `)}
-          ${this.isRetrieving ? html`
-            <div class="message system-message">
-              <p>📚 Searching employee handbook...</p>
-            </div>
-          ` : ''}
-          ${this.isLoading && !this.isRetrieving ? html`
-            <div class="message ai-message">
-              <div class="message-content">
-                <span class="message-sender">AI</span>
-                <p>Thinking...</p>
-              </div>
-            </div>
-          ` : ''}
+            `
+          )}
+          ${this.isRetrieving
+            ? html`
+                <div class="message system-message">
+                  <p>📚 Searching employee handbook...</p>
+                </div>
+              `
+            : ""}
+          ${this.isLoading && !this.isRetrieving
+            ? html`
+                <div class="message ai-message">
+                  <div class="message-content">
+                    <span class="message-sender">AI</span>
+                    <p>Thinking...</p>
+                  </div>
+                </div>
+              `
+            : ""}
         </div>
         <div class="chat-input">
           <input
             type="text"
-            placeholder="Ask about company policies, benefits, etc..."
+            placeholder=${this.chatMode === "basic"
+              ? "Ask about company policies, benefits, etc..."
+              : "Ask Agent"}
             .value=${this.inputMessage}
             @input=${this._handleInput}
             @keyup=${this._handleKeyUp}
@@ -174,6 +212,22 @@ export class ChatInterface extends LitElement {
     }
   }
 
+  // Handle mode change
+  _handleModeChange(e) {
+  const newMode = e.target.value;
+  if (newMode !== this.chatMode) {
+    this.chatMode = newMode;
+    
+    // Disable RAG when switching to agent mode
+    if (newMode === 'agent') {
+      this.ragEnabled = false;
+    }
+    
+    clearMessages();
+    this.messages = [];
+  }
+}
+
   // Handle sending a message and receiving a response
   async _sendMessage() {
     if (!this.inputMessage.trim() || this.isLoading) return;
@@ -205,7 +259,7 @@ export class ChatInterface extends LitElement {
       const aiMessage = {
         role: "assistant",
         content: apiResponse.reply,
-        sources: apiResponse.sources || []
+        sources: apiResponse.sources || [],
       };
 
       this.messages = [...this.messages, aiMessage];
@@ -226,18 +280,19 @@ export class ChatInterface extends LitElement {
   }
 
   // Call the API endpoint with RAG support
-  async _apiCall(message) {
-    const res = await fetch("http://localhost:3001/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ 
-        message,
-        useRAG: this.ragEnabled 
-      }),
-    });
-    const data = await res.json();
-    return data;
-  }
+async _apiCall(message) {
+  const res = await fetch("http://localhost:3001/chat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ 
+      message,
+      useRAG: this.ragEnabled,
+      mode: this.chatMode // Send the selected mode to the server
+    }),
+  });
+  const data = await res.json();
+  return data;
+}
 }
 
 customElements.define("chat-interface", ChatInterface);

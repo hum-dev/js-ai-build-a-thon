@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://aka.ms/ai-foundry-vsc/agent/1.0.0
+version: 1.0.0
+name: humagent
+description: Description of the agent
+id: asst_9HRbT6Pnv5tDJqfLSzILTxjf
+metadata:
+  authors:
+    - author1
+    - author2
+  tags:
+    - tag1
+    - tag2
+model:
+  id: gpt-4.1-chat
+  options:
+    temperature: 0.7
+    top_p: 1
+instructions: >-
+  You are a helpful agent who loves emojis 😊. Be friendly and concise in your
+  responses.
+tools:
+  - type: bing_grounding
+    options:
+      tool_connections:
+        - >-
+          /subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/my-resource-group/providers/Microsoft.BingGrounding/bingGroundingService/my-bing-grounding-service
