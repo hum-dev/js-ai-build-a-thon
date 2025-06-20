@@ -1,4 +1,4 @@
-import { AIProjectsClient, ToolUtility } from "@azure/ai-projects";
+import { AIProjectClient } from "@azure/ai-projects";
 import { DefaultAzureCredential } from "@azure/identity";
 import dotenv from "dotenv";
 
@@ -11,35 +11,41 @@ class FunctionToolExecutor {
     this.functionTools = [
       {
         func: this.getGeoCoordinates,
-        ...ToolUtility.createFunctionTool({
-          name: "getGeoCoordinates",
-          description: "Get geocoordinates (latitude and longitude) from city name.",
-          parameters: {
-            type: "object",
-            properties: {
-              location: {
-                type: "string",
-                description: "The name of the city to get geocoordinates for.",
+        definition: {
+          type: "function",
+          function: {
+            name: "getGeoCoordinates",
+            description: "Get geocoordinates (latitude and longitude) from city name.",
+            parameters: {
+              type: "object",
+              properties: {
+                location: {
+                  type: "string",
+                  description: "The name of the city to get geocoordinates for.",
+                },
               },
+              required: ["location"],
             },
-            required: ["location"],
           },
-        }),
+        },
       },
       {
         func: this.getWeather,
-        ...ToolUtility.createFunctionTool({
-          name: "getWeather",
-          description: "Get current weather for a given city using its coordinates",
-          parameters: {
-            type: "object",
-            properties: {
-              lat: { type: "number", description: "Latitude of the city" },
-              lon: { type: "number", description: "Longitude of the city" },
+        definition: {
+          type: "function",
+          function: {
+            name: "getWeather",
+            description: "Get current weather for a given city using its coordinates",
+            parameters: {
+              type: "object",
+              properties: {
+                lat: { type: "number", description: "Latitude of the city" },
+                lon: { type: "number", description: "Longitude of the city" },
+              },
+              required: ["lat", "lon"],
             },
-            required: ["lat", "lon"],
           },
-        }),
+        },
       }
     ];
     this.processedToolCalls = new Set();
@@ -111,6 +117,7 @@ class FunctionToolExecutor {
       }
     };
   }
+  
   async invokeTool(toolCall) {
     console.log(`Invoking tool: ${toolCall.function.name}`);
     
@@ -176,7 +183,7 @@ class FunctionToolExecutor {
 
 export class AgentService {
   constructor() {
-    this.client = AIProjectsClient.fromConnectionString(
+    this.client = new AIProjectClient(
       process.env.AGENT_STRING,
       new DefaultAzureCredential()
     );
@@ -190,12 +197,47 @@ export class AgentService {
 
   async initializeAgent() {
     const functionTools = this.functionToolExecutor.getFunctionDefinitions();
-    // You can get the agent ID from your my-agent.agent.yaml file or the sample code
-    this.agentId = "asst_9HRbT6Pnv5tDJqfLSzILTxjf";
-    this.agent = await this.client.agents.updateAgent(this.agentId, {
-      instructions: "You are a helpful weather assistant. When users ask for weather in a city, first call getGeoCoordinates with the city name to get coordinates, then use those coordinates with getWeather to get the weather data.",
-      tools: functionTools,
-    });
+    
+    // FIXED: Use the actual deployment name, not model name
+    // Common deployment names: "gpt-4", "gpt-4o", "gpt-35-turbo", etc.
+    // Default to "gpt-4" if no deployment name is specified
+    const deploymentName = process.env.AZURE_OPENAI_DEPLOYMENT || "gpt-4";
+    
+    // Validate that deployment name is provided
+    if (!deploymentName || deploymentName.trim() === "") {
+      throw new Error("AZURE_OPENAI_DEPLOYMENT environment variable is required and cannot be empty");
+    }
+    
+    try {
+      console.log(`Creating agent with deployment name: ${deploymentName}`);
+      
+      this.agent = await this.client.agents.createAgent({
+        model: deploymentName, // This must be your actual deployment name
+        name: "Weather Assistant",
+        instructions: "You are a helpful weather assistant. When users ask for weather in a city, first call getGeoCoordinates with the city name to get coordinates, then use those coordinates with getWeather to get the weather data.",
+        tools: functionTools,
+      });
+      
+      this.agentId = this.agent.id;
+      console.log(`Successfully created agent with ID: ${this.agentId} using deployment: ${deploymentName}`);
+    } catch (error) {
+      console.error("Failed to initialize agent:", error);
+      console.error("Error details:", error.message);
+      console.error("Attempted deployment name:", deploymentName);
+      
+      // Provide helpful error message
+      if (error.message.includes("'model' is required") || error.statusCode === 400) {
+        console.error(`
+TROUBLESHOOTING TIPS:
+1. Verify your AZURE_OPENAI_DEPLOYMENT environment variable contains your actual deployment name
+2. Common deployment names: "gpt-4", "gpt-4o", "gpt-35-turbo" 
+3. Check your Azure AI Foundry portal to see your deployed model names
+4. The deployment name might be different from the model name (e.g., deployment "my-gpt4" for model "gpt-4")
+`);
+      }
+      
+      throw error;
+    }
   }
 
   async getOrCreateThread(sessionId) {
