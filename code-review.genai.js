@@ -1,4 +1,5 @@
 const changes = await git.diff({ staged: true });
+const token = process.env["GITHUB_TOKEN"];
 
 defDiff("CODE_CHANGES", changes);
 
