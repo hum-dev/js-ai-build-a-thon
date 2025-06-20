@@ -42,7 +42,7 @@ jobs:
         with:
           fetch-depth: 0 # Let's get all the branches.
 
-      - name:  Check code-review.genai.js directory exists
+      - name: Check package.json
         uses: skills/action-check-file@v1
         with:
           file: "code-review.genai.js"
